@@ -33,7 +33,11 @@ const EstudianteSchema = {
 }
 
 class Estudiante extends Model {
-  static associate() {
+  static associate(models) {
+    this.hasMany(models.Prestamo, {
+      as: 'prestamo',
+      foreignKey: 'idLector'
+    });
   }
 
   static config(sequelize) {

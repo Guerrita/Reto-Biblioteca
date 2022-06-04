@@ -1,28 +1,28 @@
 const express = require('express');
 
-const StudentService = require('./../services/estudiantes.service');
+const EstudianteService = require('./../services/estudiantes.service');
 const validatorHandler = require('./../middlewares/validator.handler');
-const { createStudentSchema, updateStudentSchema, getStudentSchema } = require('./../schemas/estudiante.schema');
+const { createEstudianteSchema, updateEstudianteSchema, getEstudianteSchema } = require('./../schemas/estudiante.schema');
 
 const router = express.Router();
-const service = new StudentService();
+const service = new EstudianteService();
 
 router.get('/', async (req, res, next) => {
   try {
-    const student = await service.find();
-    res.json(student);
+    const estudiante = await service.find();
+    res.json(estudiante);
   } catch (error) {
     next(error);
   }
 });
 
 router.get('/:idLector',
-  validatorHandler(getStudentSchema, 'params'),
+  validatorHandler(getEstudianteSchema, 'params'),
   async (req, res, next) => {
     try {
       const { idLector } = req.params;
-      const student = await service.findOne(idLector);
-      res.json(student);
+      const estudiante = await service.findOne(idLector);
+      res.json(estudiante);
     } catch (error) {
       next(error);
     }
@@ -30,12 +30,12 @@ router.get('/:idLector',
 );
 
 router.post('/',
-  validatorHandler(createStudentSchema, 'body'),
+  validatorHandler(createEstudianteSchema, 'body'),
   async (req, res, next) => {
     try {
       const body = req.body;
-      const newStudent = await service.create(body);
-      res.status(201).json(newStudent);
+      const newEstudiante = await service.create(body);
+      res.status(201).json(newEstudiante);
     } catch (error) {
       next(error);
     }
@@ -43,8 +43,8 @@ router.post('/',
 );
 
 router.patch('/:idLector',
-  validatorHandler(getStudentSchema, 'params'),
-  validatorHandler(updateStudentSchema, 'body'),
+  validatorHandler(getEstudianteSchema, 'params'),
+  validatorHandler(updateEstudianteSchema, 'body'),
   async (req, res, next) => {
     try {
       const { idLector } = req.params;
@@ -58,7 +58,7 @@ router.patch('/:idLector',
 );
 
 router.delete('/:idLector',
-  validatorHandler(getStudentSchema, 'params'),
+  validatorHandler(getEstudianteSchema, 'params'),
   async (req, res, next) => {
     try {
       const { idLector } = req.params;

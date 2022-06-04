@@ -1,5 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
+const { CATEGORIA_TABLE } = require('./categorias.model');
+
 const LIBRO_TABLE = 'libro';
 
 const LibroSchema = {
@@ -16,12 +18,23 @@ const LibroSchema = {
   idCategoria: {
     allowNull: false,
     type: DataTypes.INTEGER,
-    field: 'id_categoria'
+    field: 'categoria',
+    references: {
+      model: CATEGORIA_TABLE,
+      key: 'id_categoria'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
   }
 }
 
 class Libro extends Model {
-  static associate() {
+  static associate(models) {
+    this.belongsTo(models.Categoria, { as: 'categoria', foreignKey: 'idCategoria' });
+    this.hasMany(models.Prestamo, {
+      as: 'prestamo',
+      foreignKey: 'idLibro'
+    });
   }
 
   static config(sequelize) {
@@ -34,4 +47,4 @@ class Libro extends Model {
   }
 }
 
-module.exports = { LIBRO_TABLE, LibroSchema, Libro }
+module.exports = { Libro, LibroSchema, LIBRO_TABLE  }

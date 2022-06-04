@@ -7,24 +7,24 @@ const direccion = Joi.string();
 const carrera=  Joi.number().integer();
 const edad = Joi.number().integer();
 
-const createStudentSchema = Joi.object({
+const createEstudianteSchema = Joi.object({
   idLector: idLector.required(),
   ci: ci.required(),
   nombre: nombre.required(),
-  direccion:direccion.optional(),
+  direccion:direccion,
   carrera: carrera.required(),
-  edad: edad.optional()
+  edad: edad
 });
 
-const updateStudentSchema = Joi.object({
+const updateEstudianteSchema = Joi.object({
   nombre: nombre,
   direccion: direccion,
   carrera: carrera,
   edad: edad
 });
 
-const getStudentSchema = Joi.object({
+const getEstudianteSchema = Joi.object({
   idLector: idLector.required(),
 });
 
-module.exports = { createStudentSchema, updateStudentSchema, getStudentSchema };
+module.exports = { createEstudianteSchema, updateEstudianteSchema, getEstudianteSchema };

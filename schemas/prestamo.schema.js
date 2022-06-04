@@ -1,28 +1,28 @@
 const Joi = require('joi');
 
+const idPrestamo = Joi.number().integer();
 const idLector = Joi.number().integer();
 const idLibro = Joi.number().integer();
-const fechaPrestamo = Joidate().format('YYYY-MM-DD').utc();
-const fechaDevolucion = Joi.date().format('YYYY-MM-DD').utc();
+const fechaPrestamo = Joi.date().raw();
+const fechaDevolucion = Joi.date().raw();
 const devuelto =  Joi.boolean();
-const fechaPago = Joi.date().format('YYYY-MM-DD').utc();
-const fechaVencimiento = Joi.date().format('YYYY-MM-DD').utc();
+const pago = Joi.date().raw();
+const fechaVencimiento = Joi.date().raw();
 
-const createLoanSchema = Joi.object({
+const createPrestamoSchema = Joi.object({
+    idPrestamo: idPrestamo.required(),
     idLibro: idLibro.required(),
     idLector: idLector.required(),
-    devuelto: devuelto.optional,
-    fechaPago: fechaPago.optional(),
-    fechaVencimiento: fechaVencimiento.optional()
 });
 
-const updateLoanSchema = Joi.object({
-    titulo: titulo,
-    idCategoria: idCategoria
+const updatePrestamoSchema = Joi.object({
+    fechaDevolucion: fechaDevolucion,
+    devuelto: devuelto,
+    pago: pago
 });
 
-const getLoanSchema = Joi.object({
-    idLibro: idLibro.required(),
+const getPrestamoSchema = Joi.object({
+    idPrestamo: idPrestamo.required()
 });
 
-module.exports = { createLoanSchema, updateLoanSchema, getLoanSchema };
+module.exports = { createPrestamoSchema, updatePrestamoSchema, getPrestamoSchema };
