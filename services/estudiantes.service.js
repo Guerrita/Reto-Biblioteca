@@ -15,6 +15,11 @@ class EstudianteService {
     return rta;
   }
 
+  async findcareers() {
+    const [results, metadata] = await models.Prestamo.sequelize.query("SELECT e.carrera, COUNT(e.carrera) as numero_estudiantes  from estudiante e GROUP BY e.carrera order by e.carrera desc"); 
+    return results;
+  }
+
   async findOne(idLector) {
     const student = await models.Estudiante.findByPk(idLector);
     if (!student) {

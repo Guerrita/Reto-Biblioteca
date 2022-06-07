@@ -16,6 +16,16 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/max', async (req, res, next) => {
+  try {
+    const prestamo = await service.findMostLoans();
+    res.json(prestamo);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 router.get('/:idPrestamo',
   validatorHandler(getPrestamoSchema, 'params'),
   async (req, res, next) => {

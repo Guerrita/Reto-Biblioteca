@@ -16,6 +16,16 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/carreras', async (req, res, next) => {
+  try {
+    const carreras = await service.findcareers();
+    res.json(carreras);
+  } catch (error) {
+    next(error);
+  }
+});
+
+
 router.get('/:idLector',
   validatorHandler(getEstudianteSchema, 'params'),
   async (req, res, next) => {

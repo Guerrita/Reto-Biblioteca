@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <link rel="stylesheet" href="./style.css" type="text/css"/>
+    <script src="./script.js"></script>
+    <title>Biblioteca</title>
+
+    <script>
+    </script>
+  </head>
+
+
+  <body>
+    <nav class="nav">
+      <img src="logo-eafit.png"/>
+    </nav>
+
+    <section class="banner">
+      <h1>¿Qué servicio necesitas el dia de hoy?</h1>
+    </section>
+
+    <div class="options">
+      <input
+        class="option-buttons-radio"
+        type="radio"
+        id="options-libros"
+        name="options"
+        checked
+        onchange="showForm('libros'); hide('prestamos'); hide('estudiantes'); hide('categorias');"
+      />
+      <label class="option-buttons" for="options-libros">
+        <span>Libros</span>
+      </label>
+
+      <input
+        class="option-buttons-radio"
+        type="radio"
+        id="options-prestamos"
+        name="options"
+        onchange="showForm('prestamos'); hide('libros'); hide('estudiantes');  hide('categorias');"
+      />
+      <label class="option-buttons" for="options-prestamos">
+        <span>Prestamos</span>
+      </label>
+
+      <input
+        class="option-buttons-radio"
+        type="radio"
+        id="options-categorias"
+        name="options"
+        onchange="showForm('categorias'); hide('libros'); hide('prestamos'); hide('estudiantes')"
+      />
+      <label class="option-buttons" for="options-categorias">
+        <span>Categorias</span></label
+      >
+
+      <input
+        class="option-buttons-radio"
+        type="radio"
+        id="options-estudiantes"
+        name="options"
+        onchange="showForm('estudiantes'); hide('libros'); hide('prestamos'); hide('categorias');"
+      />
+      <label class="option-buttons" for="options-estudiantes">
+        <span>Estudiantes</span></label
+      >
+    </div>
+
+    <section class="section__form" id="libros">
+      <form class="form" action="">
+        <div class="query-operations" tabindex="1">
+          <input
+            class="selectopt operacion-libros"
+            name="query-operation"
+            type="radio"
+            id="tipo_opt_1"
+            disabled
+            checked
+          />
+          <label for="tipo_opt_1" class="query-option">Tipo de operaci&oacute;n</label>
+
+          <input
+            class="selectopt operacion-libros"
+            name="query-operation"
+            type="radio"
+            id="buscar_opt_1"
+          />
+          <label for="buscar_opt_1" class="query-option">Buscar</label>
+          <input
+            class="selectopt operacion-libros"
+            name="query-operation"
+            type="radio"
+            id="modificar_opt_1"
+          />
+          <label for="modificar_opt_1" class="query-option">Modificar</label>
+          <input
+            class="selectopt operacion-libros"
+            name="query-operation"
+            type="radio"
+            id="eliminar_opt_1"
+          />
+          <label for="eliminar_opt_1" class="query-option">Eliminar</label>
+          <input
+            class="selectopt operacion-libros"
+            name="query-operation"
+            type="radio"
+            id="agregar_opt_1"
+          />
+          <label for="agregar_opt_1" class="query-option">Agregar</label>
+        </div>
+
+
+        <div class="query-fields">
+          <label for="id_libro">
+            <span></span>
+            <input
+              class="query-field-data"
+              type="text"
+              id="id_libro"
+              placeholder="Id Libro"
+              
+            />
+          </label>
+
+          <label for="titulo_libro">
+            <input
+              class="query-field-data"
+              type="text"
+              id="titulo_libro"
+              placeholder="T&iacute;tulo"
+              
+            />
+          </label>
+
+          <label for="tipo_categoria">
+            <input
+              class="query-field-data"
+              type="text"
+              id="tipo_categoria"
+              placeholder="Categor&iacute;a"
+              
+            />
+          </label>
+        </div>
+
+        <button type="button" class="boton-continuar" onclick="crudLibros()">Continuar</button>
+      </form>
+    </section>
+
+    <section class="section__form" id="prestamos" style="display: none;">
+      <form class="form" action="">
+        <div class="query-operations" tabindex="1">
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="tipo_opt_2"
+            disabled
+            checked
+          />
+          <label for="tipo_opt_2" class="query-option">Tipo de operaci&oacute;n</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="buscar_opt_2"
+          />
+          <label for="buscar_opt_2" class="query-option">Buscar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="modificar_opt_2"
+          />
+          <label for="modificar_opt_2" class="query-option">Modificar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="eliminar_opt_2"
+          />
+          <label for="eliminar_opt_2" class="query-option">Eliminar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="agregar_opt_2"
+          />
+          <label for="agregar_opt_2" class="query-option">Agregar</label>
+        </div>
+        <div class="query-fields">
+          <label for="id_prestamo">
+            <span></span>
+            <input
+              class="query-field-data"
+              type="text"
+              id="id_prestamo"
+              placeholder="Id Prestamo"
+              
+            />
+          </label>
+
+          <label for="id_estudiante_prestamo">
+            <input
+              class="query-field-data"
+              type="text"
+              id="id_estudiante_prestamo"
+              placeholder="Id Estudiante"
+              
+            />
+          </label>
+
+          <label for="id_libro_prestamo">
+            <input
+              class="query-field-data"
+              type="text"
+              id="id_libro_prestamo"
+              placeholder="Id Libro"
+              
+            />
+          </label>
+
+        </div>
+
+        <button type="button" onclick="crudPrestamos()" class="boton-continuar">Continuar</button>
+      </form>
+    </section>
+
+    <section class="section__form" id="categorias" style="display: none;">
+      <form class="form" action="">
+        <div class="query-operations" tabindex="1">
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="tipo_opt_3"
+            disabled
+            checked
+          />
+          <label for="tipo_opt_3" class="query-option">Tipo de operaci&oacute;n</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="buscar_opt_3"
+          />
+          <label for="buscar_opt_3" class="query-option">Buscar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="modificar_opt_3"
+          />
+          <label for="modificar_opt_2" class="query-option">Modificar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="eliminar_opt_3"
+          />
+          <label for="eliminar_opt_3" class="query-option">Eliminar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="agregar_opt_3"
+          />
+          <label for="agregar_opt_3" class="query-option">Agregar</label>
+        </div>
+        <div class="query-fields">
+          <label for="id_categoria">
+            <span></span>
+            <input
+              class="query-field-data"
+              type="text"
+              id="id_categoria"
+              placeholder="Id Categor&iacute;a"
+              
+            />
+          </label>
+
+          <label for="precio_dia">
+            <input
+              class="query-field-data"
+              type="text"
+              id="precio_dia"
+              placeholder="Precio por d&iacute;a"
+              
+            />
+          </label>
+
+          <label for="dias_prestamo">
+            <input
+              class="query-field-data"
+              type="text"
+              id="dias_prestamo"
+              placeholder="D&iacute;as de pr&eacute;stamo"
+              
+            />
+          </label>
+
+          <label for="nombre_categoria">
+            <input
+              class="query-field-data"
+              type="text"
+              id="nombre_categoria"
+              placeholder="Nombre de categor&iacute;a"
+              
+            />
+          </label>
+
+        </div>
+
+        <button class="boton-continuar">Continuar</button>
+      </form>
+    </section>
+
+    <section class="section__form" id="estudiantes" style="display: none;">
+      <form class="form" action="">
+        <div class="query-operations" tabindex="1">
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="tipo_opt_4"
+            disabled
+            checked
+          />
+          <label for="tipo_opt_4" class="query-option">Tipo de operaci&oacute;n</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="buscar_opt_4"
+          />
+          <label for="buscar_opt_4" class="query-option">Buscar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="modificar_opt_4"
+          />
+          <label for="modificar_opt_4" class="query-option">Modificar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="eliminar_opt_4"
+          />
+          <label for="eliminar_opt_4" class="query-option">Eliminar</label>
+          <input
+            class="selectopt"
+            name="query-operation"
+            type="radio"
+            id="agregar_opt_4"
+          />
+          <label for="agregar_opt_4" class="query-option">Agregar</label>
+        </div>
+        <div class="query-fields">
+          <label for="id_lector">
+            <span></span>
+            <input
+              class="query-field-data"
+              type="text"
+              id="id_lector"
+              placeholder="Id Lector"
+              
+            />
+          </label>
+
+          <label for="ci">
+            <input
+              class="query-field-data"
+              type="text"
+              id="ci"
+              placeholder="Identificaci&oacute;n"
+              
+            />
+          </label>
+
+          <label for="nombre_estudiante">
+            <input
+              class="query-field-data"
+              type="text"
+              id="nombre_estudiante"
+              placeholder="Nombre"
+              
+            />
+          </label>
+
+          <label for="direccion_estudiante">
+            <input
+              class="query-field-data"
+              type="text"
+              id="direccion_estudiante"
+              placeholder="Direcci&oacute;n"
+            />
+          </label>
+
+          <label for="carrera_estudiante">
+            <input
+              class="query-field-data"
+              type="text"
+              id="carrera_estudiante"
+              placeholder="Carrera"
+              
+            />
+          </label>
+
+          <label for="edad_estudiante">
+            <input
+              class="query-field-data"
+              type="text"
+              id="edad_estudiante"
+              placeholder="Edad"
+            />
+          </label>
+        </div>
+
+        <button class="boton-continuar">Continuar</button>
+      </form>
+    </section>
+  </body>
+</html>

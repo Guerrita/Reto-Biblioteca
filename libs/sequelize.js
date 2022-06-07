@@ -18,6 +18,6 @@ const sequelize = new Sequelize(URI,{
 
 setupModels(sequelize);
 
-sequelize.sync();
+sequelize.sync();  //Crea la base de datos cada que se corre el servidor
 
 module.exports = sequelize;

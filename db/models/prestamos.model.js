@@ -39,13 +39,13 @@ const PrestamoSchema = {
   },
   fechaPrestamo: {
     allowNull: true,
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     field: 'fecha_prestamo',
     defaultValue: Sequelize.NOW
   },
   fechaDevolucion: {
     allowNull: true,
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     field: 'fecha_devolucion'
   },
   devuelto: {
@@ -55,12 +55,12 @@ const PrestamoSchema = {
   },
   fechaPago: {
     allowNull: true,
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     field: 'fecha_pago'
   },
   fechaVencimiento: {
     allowNull: true,
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     field: 'fecha_vencimiento',
     defaultValue:  null//new Date().getTime() + (1000 * 60 * 60 * 24 * 15)
   }

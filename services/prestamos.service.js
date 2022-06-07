@@ -6,9 +6,8 @@ class PrestamoService {
   constructor() {}
     //new Date().getTime() + (1000 * 60 * 60 * 24 * 15)
   async create(data) {
-    console.log(data);
     const newPrestamo = await models.Prestamo.create(data);
-    return data;
+    return newPrestamo;
   }
 
   async find() {
@@ -22,6 +21,11 @@ class PrestamoService {
       throw boom.notFound('prestamo not found');
     }
     return prestamo;
+  }
+
+  async findMostLoans() {
+    const [results, metadata] = await models.Prestamo.sequelize.query("SELECT e.nombre, npe.id_lector, MAX(npe.numero_prestamos) as num_prestamos  from (SELECT id_lector, COUNT(id_lector) as numero_prestamos FROM prestamo where devuelto = false or devuelto = true  GROUP BY id_lector) as npe, estudiante e where npe.id_lector = e.id_lector  GROUP BY npe.id_lector, e.nombre order by num_prestamos desc limit 5"); 
+    return results;
   }
 
   async update(idPrestamo, changes) {
