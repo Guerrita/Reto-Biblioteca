@@ -16,6 +16,15 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.get('/num/editorial', async (req, res, next) => {
+  try {
+    const editorial = await service.LibrosPorEditorial();
+    res.json(editorial);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/:idEditorial',
   validatorHandler(getEditorialSchema, 'params'),
   async (req, res, next) => {

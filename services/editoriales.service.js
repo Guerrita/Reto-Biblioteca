@@ -17,6 +17,11 @@ class EditorialService {
     return rta;
   }
 
+  async LibrosPorEditorial(){
+    const [results, metadata] = await models.Editorial.sequelize.query("SELECT e.nombre,  Count(l.id_libro) as TOTAL  from editorial e left join libro as l on (e.id_editorial = l.editorial) group By e.nombre order by Count(l.id_libro) DESC"); 
+    return results;
+  }
+
   async findOne(idEditorial) {
     const editorial = await models.Editorial.findByPk(idEditorial,{
         include: ['libro']
