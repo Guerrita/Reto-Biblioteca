@@ -4,6 +4,7 @@ const {Categoria, CategoriaSchema } = require('./categorias.model');
 const {Libro, LibroSchema } = require('./libros.model');
 const {Prestamo, PrestamoSchema } = require('./prestamos.model');
 const {Editorial, EditorialSchema } = require('./editoriales.model');
+const {Carrera, CarreraSchema } = require('./carreras.model');
 
 function setupModels(sequelize){
   Estudiante.init(EstudianteSchema, Estudiante.config(sequelize));
@@ -11,12 +12,14 @@ function setupModels(sequelize){
   Libro.init(LibroSchema, Libro.config(sequelize));
   Prestamo.init(PrestamoSchema, Prestamo.config(sequelize));
   Editorial.init(EditorialSchema, Editorial.config(sequelize));
+  Carrera.init(CarreraSchema, Carrera.config(sequelize));
 
   Categoria.associate(sequelize.models);
   Libro.associate(sequelize.models);
   Estudiante.associate(sequelize.models);
   Prestamo.associate(sequelize.models);
   Editorial.associate(sequelize.models);
+  Carrera.associate(sequelize.models);
 }
 
 module.exports = setupModels;

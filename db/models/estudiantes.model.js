@@ -1,6 +1,7 @@
 const { Model, DataTypes, Sequelize } = require('sequelize');
 
 const ESTUDIANTE_TABLE = 'estudiante';
+const CARRERA_TABLE = 'carrera';
 
 const EstudianteSchema = {
   idLector: {
@@ -22,18 +23,26 @@ const EstudianteSchema = {
     allowNull: true,
     type: DataTypes.STRING
   },
-  carrera: {
+  idCarrera: {
     allowNull: false,
-    type: DataTypes.INTEGER
+    type: DataTypes.INTEGER,
+    field: 'carrera',
+    references: {
+      model: CARRERA_TABLE,
+      key: 'id_carrera'
+    },
+    onUpdate: 'CASCADE',
+    onDelete: 'SET NULL'
   },
   edad: {
     allowNull: true,
     type: DataTypes.INTEGER
-  }
+  },
 }
 
 class Estudiante extends Model {
   static associate(models) {
+    this.belongsTo(models.Carrera, { as: 'carrera', foreignKey: 'idCarrera' });
     this.hasMany(models.Prestamo, {
       as: 'prestamo',
       foreignKey: 'idLector'
